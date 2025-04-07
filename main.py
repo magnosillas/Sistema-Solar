@@ -15,6 +15,7 @@ camera = Camera(glm.vec3(3750.0, 1500.0, -1000.0))
 ultimo_x = WIDTH / 2.0
 ultimo_y = HEIGHT / 2.0
 first_mouse = True
+modo_camera = False
 
 # Tempo
 intervalo_entre_frames = 0.0
@@ -57,7 +58,7 @@ def process_input(window):
     """
     Classe que processa as entradas do teclado
     """
-    global intervalo_entre_frames
+    global intervalo_entre_frames, modo_camera
 
     # Verifica se Shift está pressionado
     multiplier = 1.0
@@ -67,6 +68,13 @@ def process_input(window):
 
     if glfw.get_key(window, glfw.KEY_ESCAPE) == glfw.PRESS:
         glfw.set_window_should_close(window, True)
+        
+    if glfw.get_key(window, glfw.KEY_M) == glfw.PRESS:
+        modo_camera = not modo_camera
+        if modo_camera:
+            glfw.set_input_mode(window, glfw.CURSOR, glfw.CURSOR_DISABLED)
+        else:
+            glfw.set_input_mode(window, glfw.CURSOR, glfw.CURSOR_NORMAL)
 
     # Movimentação WASD
     if glfw.get_key(window, glfw.KEY_W) == glfw.PRESS:
